@@ -1,0 +1,11 @@
+body
+{
+    min-width: 400px;
+    background-color: #1e81b0;
+    color: white;
+}
+
+a, a:link, a:visited
+{
+    color: white;
+}
