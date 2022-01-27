@@ -69,7 +69,7 @@ function interceptNative(){
         for(var i = 0; i < needArgs.length; i++){
             var name = needArgs[i];
             var func = document[name];
-            console.log(name);
+            //console.log(name);
             if(typeof func == 'function'){
                 document[name] = funcLogger.replace(func, name); //...replace it.
                 console.log("is function")
@@ -89,6 +89,8 @@ function interceptD3()
     if(alreadyFired)
         return;
 
+    interceptNative();
+
     //Window.d3 is created by D3 source code.
     if(window.d3)
     {
@@ -104,7 +106,6 @@ function interceptD3()
             var func = window.d3[name];
             if(typeof func == "function"){ //...if that field is a function...
                 window.d3[name] = funcLogger.replace(func, name); //...replace it.
-                console.log(name)
             }
             else //...if that field is not a function...
                 for(var subName in window.d3[name])
@@ -134,7 +135,6 @@ function inspectMutations(mutations)
         {
             if(newNode.tagName == "SCRIPT")
                 interceptD3();
-                interceptNative();
         }
         catch(err){}//Thousands of mutations occur, we can't handle errors w/o slowing the page.
     }
@@ -166,8 +166,6 @@ function sendToParser()
 //-------------------------------------------------------------------------------------------------
 
 //The interceptor is appended to document before anything else loads.
-
-interceptjQuery();
 
 //Create a mutation observer to watch for changes to the DOM. inspectMutations() is the callback.
 var mo = new MutationObserver(inspectMutations);
