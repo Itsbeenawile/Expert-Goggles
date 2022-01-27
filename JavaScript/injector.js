@@ -64,21 +64,6 @@ funcLogger.replace = function(old_func, func_name)
     }
 }
 
-function interceptNative(){
-    if(document){
-        for(var i = 0; i < needArgs.length; i++){
-            var name = needArgs[i];
-            var func = document[name];
-            console.log(name);
-            if(typeof func == 'function'){
-                document[name] = funcLogger.replace(func, name); //...replace it.
-                console.log("is function")
-            }
-        }
-    }
-
-}
-
 //InterceptD3() checks whether D3 source code has loaded on the page. If it has, it uses
 //funcLogger.replace() to replace all D3 functions with self-logging functions. Additionally,
 //it disables the MutationObserver watching for script loading, to avoid a slow page execution.
@@ -104,7 +89,6 @@ function interceptD3()
             var func = window.d3[name];
             if(typeof func == "function"){ //...if that field is a function...
                 window.d3[name] = funcLogger.replace(func, name); //...replace it.
-                console.log(name)
             }
             else //...if that field is not a function...
                 for(var subName in window.d3[name])
@@ -134,7 +118,6 @@ function inspectMutations(mutations)
         {
             if(newNode.tagName == "SCRIPT")
                 interceptD3();
-                interceptNative();
         }
         catch(err){}//Thousands of mutations occur, we can't handle errors w/o slowing the page.
     }
@@ -166,8 +149,6 @@ function sendToParser()
 //-------------------------------------------------------------------------------------------------
 
 //The interceptor is appended to document before anything else loads.
-
-interceptjQuery();
 
 //Create a mutation observer to watch for changes to the DOM. inspectMutations() is the callback.
 var mo = new MutationObserver(inspectMutations);
