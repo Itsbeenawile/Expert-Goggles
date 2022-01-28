@@ -31,8 +31,8 @@ function toggleSidebar()
     //If the sidebar is closed, open it
     if(sbOpened < 0)
     {
-        document.body.style.marginRight = "260px";
-        sidebar.style.width = "248px";
+        document.body.style.marginRight = "285px";
+        sidebar.style.width = "275px";
         sidebar.style["padding-left"] = "5px";
         sidebar.style["padding-right"] = "5px";
     }
@@ -107,6 +107,12 @@ function reportError()
     sidebar.appendChild(thanks);
 }
 
+function fitIframe(iframe)
+{
+    iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+    iframe.style.width = "250px";
+}
+
 //generateSidebar() generates a sidebar div element and populates it with the guide received
 //from DBConn.js. The div is stored in the sidebar internal field.
 
@@ -118,28 +124,11 @@ function generateSidebar(guideInfo)
 
     //Take the Object Passed by the Database and Generate the Guide:
 
-    //Title
-    var titleDiv = document.createElement("div");
-    var outerDiv = document.createElement("div");
-    outerDiv.classList.add("titlediv");
-    titleDiv.innerHTML = guideInfo["Name"] + "<br><br>";
-    titleDiv.classList.add("guideTitle");
-    sb.appendChild(outerDiv);
-    outerDiv.appendChild(titleDiv);
-
-    //Image
-    var pic = document.createElement("img");
-    pic.src = guideInfo["img"];
-    pic.width = "225";
-    outerDiv.appendChild(pic);
-
-    //Body
-    var bodyDiv = document.createElement("div");
-    bodyDiv.innerHTML = "<br>" + guideInfo["Guide"] + "<br><br>";
-    bodyDiv.innerHTML += "-------------------------------------------<br>";
-    bodyDiv.innerHTML += "&nbsp;&nbsp;&nbsp;Did we get this type wrong?&nbsp;&nbsp;<br><br>";
-    bodyDiv.classList.add("bodyDiv");
-    sb.appendChild(bodyDiv);
+    //Import Datavizcatalogue guide into iframe
+    var iframe = document.createElement("iframe");
+    iframe.src = guideInfo["URL"];
+    iframe.classList.add("iframeSet");
+    sb.appendChild(iframe);
 
     //Report Error Button
     var buttonDiv = document.createElement("div");

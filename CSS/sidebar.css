@@ -28,9 +28,9 @@
      bottom: 0;
      right: 0;
      color: white;
-     font-size: 16px;
+     /*font-size: 16px;*/
      box-shadow: -2px 0px 1px #154c79;
-     background-color: #1e81b0;
+     /*background-color: #1e81b0;*/
      overflow-x: hidden; /* Disable horizontal scroll */
      padding-top: 30px; /* Place content 60px from the top */
      padding-left: 0px;
@@ -40,6 +40,17 @@
 .expertGogglesSidebar .titlediv
 {
     text-align: center;
+}
+
+.expertGogglesSidebar .iframeSet
+{
+    position:absolute;
+    top:--0px;
+    left:-0px;
+    width:100%px;
+    height:100%;
+    overflow-x: hidden;
+    white-space: nowrap;
 }
 
 .expertGogglesSidebar .bodyDiv
