@@ -1,0 +1,5 @@
+#Ignore Local IDE Files
+.idea/
+
+#Ignore Files Configured with Local Paths
+tests/Integration_Tests/ChartTypeTests.py
