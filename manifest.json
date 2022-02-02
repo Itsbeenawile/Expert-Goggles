@@ -17,11 +17,7 @@
   {
       "matches": ["<all_urls>"],
       "css": ["CSS/sidebar.css"],
-      "js":
-      [
-          "JavaScript/parser.js",
-          "JavaScript/ui_generator.js"
-      ],
+      "js": ["JavaScript/ui_generator.js"],
       "run_at": "document_end"
   }],
   "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com/; object-src 'self'",

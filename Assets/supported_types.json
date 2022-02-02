@@ -2,76 +2,91 @@
     {
         "type": "Area Chart",
         "functions": ["area"],
-        "length": 1
+        "length": 1,
+        "URL": "https://datavizcatalogue.com/methods/area_graph.html"
     },
     {
         "type": "Bar Chart",
         "functions": ["linear", "ordinal", "range", "axis", "max", "dispatch"],
-        "length": 6
+        "length": 6,
+        "URL": "https://datavizcatalogue.com/methods/bar_chart.html"
     },
     {
         "type": "Box Plot",
         "functions": ["quantile"],
-        "length": 1
+        "length": 1,
+        "URL": "https://datavizcatalogue.com/methods/box_plot.html"
     },
     {
         "type": "Candlestick Chart",
         "functions": ["scaleQuantize"],
-        "length": 1
+        "length": 1,
+        "URL": "https://datavizcatalogue.com/methods/candlestick_chart.html"
     },
     {
         "type": "Circle Packing Chart",
         "functions": ["pack"],
-        "length": 1
-    },
-    {
-        "type": "Difference Chart",
-        "functions": ["area", "bisect"],
-        "length": 2
+        "length": 1,
+        "URL": "https://datavizcatalogue.com/methods/circle_packing.html"
     },
     {
         "type": "HeatMap",
         "functions": ["scaleSequential"],
-        "length": 1
+        "length": 1,
+        "URL": "https://datavizcatalogue.com/methods/heatmap.html"
     },
     {
         "type": "Histogram",
         "functions": ["histogram"],
-        "length": 1
+        "length": 1,
+        "URL": "https://datavizcatalogue.com/methods/histogram.html"
     },
     {
         "type": "Line Chart",
         "functions": ["line", "scaleTime"],
-        "length": 2
+        "length": 2,
+        "URL": "https://datavizcatalogue.com/methods/line_graph.html"
     },
     {
         "type": "Pie Chart",
         "functions": ["pie"],
-        "length": 1
+        "length": 1,
+        "URL": "https://datavizcatalogue.com/methods/pie_chart.html"
     },
     {
         "type": "Scatter Plot",
         "functions": ["linear", "ordinal", "range", "axis", "keys", "category10", "dispatch"],
-        "length": 7
+        "length": 7,
+        "URL": "https://datavizcatalogue.com/methods/scatterplot.html"
     },
     {
         "type": "Sequences Sunburst",
         "functions": ["hierarchy", "arc"],
-        "length": 2
+        "length": 2,
+        "URL": "https://datavizcatalogue.com/methods/sunburst_diagram.html"
     },
     {
         "type": "Stacked Area Chart",
         "functions": ["stack", "area"],
-        "length": 2
+        "length": 2,
+        "URL": "https://datavizcatalogue.com/images/buttons/SVG/on/stacked_area_graph.svg"
     },
     {
         "type": "Stacked Bar Chart",
         "functions": ["linear", "ordinal", "range", "axis", "max", "stack", "dispatch"],
-        "length": 7
+        "length": 7,
+        "URL": "https://datavizcatalogue.com/methods/stacked_bar_graph.html"
+    },
+    {
+        "type": "Stream Graph",
+        "functions": ["area", "bisect"],
+        "length": 2,
+        "URL": "https://datavizcatalogue.com/methods/stream_graph.html"
     },
     {
         "type": "TreeMap",
         "functions": ["treemap"],
-        "length": 1
+        "length": 1,
+        "URL": "https://datavizcatalogue.com/methods/treemap.html"
     }
 ]

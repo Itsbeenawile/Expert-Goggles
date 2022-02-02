@@ -155,8 +155,8 @@ function generateSidebar(guideInfo)
 //UIGen.js is reactive: All execution depends on receiving a guide from DBConn
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)
 {
-    //Make sure we didn't accidentally intercept a message from the Parser
-    if(message.from != "db_connector")
+    //Make sure we didn't accidentally intercept an incorrect message
+    if(message.from != "parser")
         return;
 
     //Otherwise, the message is a D3InfoObj from DBConn
