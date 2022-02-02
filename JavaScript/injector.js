@@ -42,8 +42,8 @@ funcLogger.replace = function(old_func, func_name)
         if(!funcLogger.funcsCalled.includes(func_name))
             funcLogger.funcsCalled.push(func_name);
 
-        // Main idea:
-        if(needArgs.includes(func_name) && arguments)   // if the needArgs array contains the
+        //If we need to grab the arguments to these functions...
+        if(needArgs.includes(func_name) && arguments)
         {
             var argString = func_name + "(";
             var count = 0;
