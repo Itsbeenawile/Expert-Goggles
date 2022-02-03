@@ -126,7 +126,7 @@ function databaseConnector()
     this.saveToHistory = function(info)
     {
         //Check we have necessary fields
-        if(!uid || !info.URL || !info.type)
+        if(!uid || !info.visURL || !info.type)
         {
             console.log("Attempted to save history without necessary info.");
             return;
@@ -134,9 +134,9 @@ function databaseConnector()
 
         //Set the doc specified by the URL hash (to avoid duplicates)
         //Use the user's specific history table.
-        his_db.doc(uid).collection("history").doc(hashCode(info.URL)).set
+        his_db.doc(uid).collection("history").doc(hashCode(info.visURL)).set
         ({
-            URL: info.URL,
+            URL: info.visURL,
             last_accessed: firebase.firestore.Timestamp.now(),
             vis_type: info.type
         })

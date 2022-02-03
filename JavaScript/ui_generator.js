@@ -14,7 +14,6 @@
 
 var sbOpened = -1; //-1 if the Sidebar is not currently showing, 1 if so.
 var sidebar = null; //Holds a sidebar div element.
-var myD3; //Holds the D3InfoObj that is sent from DBConn.
 
 //-------------------------------------------------------------------------------------------------
 // Functions
@@ -116,7 +115,7 @@ function fitIframe(iframe)
 //generateSidebar() generates a sidebar div element and populates it with the guide received
 //from DBConn.js. The div is stored in the sidebar internal field.
 
-function generateSidebar(guideInfo)
+function generateSidebar(info)
 {
     //Create the div and style it.
     var sb = document.createElement("div");
@@ -126,7 +125,7 @@ function generateSidebar(guideInfo)
 
     //Import Datavizcatalogue guide into iframe
     var iframe = document.createElement("iframe");
-    iframe.src = guideInfo["URL"];
+    iframe.src = info.guideURL;
     iframe.classList.add("iframeSet");
     sb.appendChild(iframe);
 
@@ -156,18 +155,13 @@ function generateSidebar(guideInfo)
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)
 {
     //Make sure we didn't accidentally intercept an incorrect message
-    if(message.from != "parser")
+    if(message.from != "ext_messenger")
         return;
-
-    //Otherwise, the message is a D3InfoObj from DBConn
-    myD3 = message;
-    var guideInfo = myD3.guide;
-    guideInfo["Name"] = myD3.type;
 
     //Use the received info to generate the sidebar, then create the prompt.
     try
     {
-        sidebar = generateSidebar(guideInfo);
+        sidebar = generateSidebar(message);
         document.body.appendChild(sidebar);
         createPrompt();
     }
