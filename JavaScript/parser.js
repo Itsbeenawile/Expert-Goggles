@@ -8,10 +8,6 @@
 
 function parser()
 {
-    //Load the supported_types.json file on instantiation
-    var supportedTypes;
-    waitForJson();
-
     //-------------------------------------------------------------------------------------------------
     // Helper Functions
     //-------------------------------------------------------------------------------------------------
@@ -112,6 +108,10 @@ function parser()
 
         return possType;
     }
+
+    //Load the supported_types.json file on instantiation
+    var supportedTypes;
+    waitForJson();
 
     //Return all of the above encapsulated into an object. Requires 'new' keyword.
     return this;

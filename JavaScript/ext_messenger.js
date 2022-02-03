@@ -51,8 +51,8 @@ function notifyUnsupported(info)
 // Main Execution
 //-------------------------------------------------------------------------------------------------
 
-let db_connector = new databaseConnector();
-let parser = new parser();
+var db_connector = new databaseConnector();
+var parser = new parser();
 
 //Other than initial set-up, the background is reactive.
 //This establishes a listener for intra-extension communication.
