@@ -1,22 +1,16 @@
 /**
 *                              Expert Goggles Visualization Type Parser
-*   parser.js is a content script (run on every page) that has the job of determining the type
-*   of visualizations that are encountered. When it loads, it first queries db_connector.js for
-*   the info loaded from supported_types.json, which contains function-to-type mappings. Then,
-*   it awaits a list of D3 function calls from the interceptor (injected by injector.js). When
-*   that is received, it runs the list against its parsing logic to determine what vis. type is
-*   most likely. It then appends that info into an object, and forwards that to db_connector.js
-*   to make a guide query.
+*   parser.js defines a parser object that encapsulates the code necessary for visualization type
+*   parsing. When instantiated, it loads the function-to-type mappings from supported_types.json,
+*   then provides public-facing functions to parse a vis. type from a function list, and to supply
+*   the corresponding URL to a datavizcatalog.com guide.
 */
 
 function parser()
 {
-
-    //-------------------------------------------------------------------------------------------------
-    // Internal Fields
-    //-------------------------------------------------------------------------------------------------
-
-    var supportedTypes; //Will hold the mappings loaded from supported_types.json
+    //Load the supported_types.json file on instantiation
+    var supportedTypes;
+    waitForJson();
 
     //-------------------------------------------------------------------------------------------------
     // Helper Functions
@@ -38,7 +32,7 @@ function parser()
     var waitForJson = async function() {supportedTypes = await populateTypes();}
 
     //Since type parsing directly returns a type string, the getGuideURL() function returns the
-    //dataVizCatalog URL associated with that type
+    //datavizcatalog.com URL associated with that type
 
     this.getGuideURL = function(type)
     {
@@ -50,12 +44,13 @@ function parser()
     // Type Parsing Logic
     //-------------------------------------------------------------------------------------------------
 
-    //The parseType() function is the meat of the parser. It runs the list of D3 function calls
-    //against supportedTypes.json to try and determine the most likely visualization type. If
-    //there are no D3 function calls, "none" is returned. If it cannot determine the type,
-    //"unsupported" is returned. parseType() calls sendToDB() when it is finished parsing.
-    //Parameter: parseInfo -- The message from the Interceptor, containing a list of D3 functions
-    //                        and iframe information.
+    /*
+    *   The parseType() function is the meat of the parser. It runs the list of D3 function calls
+    *   against supported_types.json to try and determine the most likely visualization type. If it
+    *   cannot determine the type, "unsupported" is returned.
+    *   Parameter: info -- An object with at least the funcList field populated.
+    *   Returns: A string containing the parsed vis. type, or "unsupported" if parse fails.
+    */
 
     this.parseType = function(info)
     {
@@ -118,12 +113,6 @@ function parser()
         return possType;
     }
 
-    //-------------------------------------------------------------------------------------------------
-    // Main Execution
-    //-------------------------------------------------------------------------------------------------
-
-    //Load the Supported Types JSON File on Start
-    waitForJson();
-
+    //Return all of the above encapsulated into an object. Requires 'new' keyword.
     return this;
 }

@@ -1,20 +1,13 @@
-/**
+/*
 *                                   Expert Goggles Database Connector
-*   db_connector.js is the extension's middle-man code. It runs in the background.html page, and
-*   handles communication between the extension's content scripts. When the browser is started,
-*   it connects to the extension's firestore database, receiving an anonymous sign-in user ID.
-*   Then, it awaits a message from the parser.js content script, with the determined type of an
-*   encountered D3 visualization. It then queries the database for the associated guide, and
-*   forwards that information to the ui_generator.js content script.
-*
-*   Additionally, as the middle-man communicator, db_connector.js receives error reports from
-*   parser.js or ui_generator.js, and either files an error report to the database, or updates the
-*   extension's page action to be relevant to the extension's context.
+*   db_connector.js defines a database connection object that encapsulates the functions for making
+*   queries or updates to the extension's Firestore database. It includes the extension's firebase
+*   configuration, connections to the User History and Error Reports tables, and functions for
+*   updating both.
 */
 
 "use strict";
 
-//Encapsulate database connection code inside a "class" called from the parser
 function databaseConnector()
 {
 
@@ -22,7 +15,7 @@ function databaseConnector()
     // Initial Setup
     //---------------------------------------------------------------------------------------------
 
-    //The extension's configuration for connecting to Firebase
+    //The extension's configuration for connecting to Firebase.
     const firebaseConfig =
     {
         apiKey: "AIzaSyDn0mMMvIOzNz3JqzGmB9H0x6QCWJSiSac",
@@ -38,7 +31,7 @@ function databaseConnector()
     const error_db = firebase.firestore().collection("Error Reports");
     const his_db = firebase.firestore().collection("User History");
 
-    //Use Firebase's Anonymous Sign-in on instantiation
+    //Use Firebase's Anonymous Sign-in to obtain a unique user ID.
     var uid;
     firebase.auth().signInAnonymously()
         .catch((error) => { console.log("Anonymous Sign in Failed: " + error.message); });
@@ -51,7 +44,7 @@ function databaseConnector()
             console.log("Anonymous Sign-in Successful.");
         }
         //If something causes a log-out, note that to the background console.
-        else{console.log("Error in Anonymous User Tracking: User is signed out.");}
+        else{console.log("Error in Anonymous User Tracking: User is not signed in.");}
     });
 
     //---------------------------------------------------------------------------------------------
@@ -64,18 +57,18 @@ function databaseConnector()
     *   in Firestore IDs.
     *
     *   Credits (modified code): Bob Jenkins (http://www.burtleburtle.net/bob/hash/doobs.html)
-    *   Parameter: ks -- a keystring to hash.
+    *   Parameter: keyString -- a string to hash.
     *   Returns: A string with a hash unique to the parameter.
     */
 
-    var hashCode = function(ks)
+    var hashCode = function(keyString)
     {
         let hash = 0;
-        let keyString = String(ks);
+        let ks = String(keyString);
 
-        for(let charIndex = 0; charIndex < keyString.length; ++charIndex)
+        for(let charIndex = 0; charIndex < ks.length; ++charIndex)
         {
-            hash += keyString.charCodeAt(charIndex);
+            hash += ks.charCodeAt(charIndex);
             hash += hash << 10;
             hash ^= hash >> 6;
         }
@@ -94,7 +87,7 @@ function databaseConnector()
     *   The makeErrorReport() logs a user-reported error to the Error Reports table on the remote
     *   database. The data includes a URL to the reported page, timestamp of the most recent
     *   report, and an incremented number of reports made on that page.
-    *   Parameter: URL -- the URL of the page where an error was reported.
+    *   Parameter: URL -- A string of the URL where an error was reported.
     */
 
     this.makeErrorReport = function(URL)
@@ -107,7 +100,7 @@ function databaseConnector()
             URL: URL,
             Most_Recent_Report: firebase.firestore.Timestamp.now(),
             Num_Reports: firebase.firestore.FieldValue.increment(1)
-        }, {merge: true})
+        }, {merge: true}) //Merge: true allows incrementing instead of overwrite
         .catch((error) =>
         {
             console.log("Error - could not upload error report. We'd ask you to report this but, "
@@ -120,20 +113,20 @@ function databaseConnector()
     *   is stored in a collection named after the user's firebase ID, and includes the type of
     *   visualization detected, the URL where it was encountered, and a timestamp of the most
     *   recent encounter. A history report is made whenever a D3 vis. type is parsed.
-    *   Parameter: info -- An object with at least URL and type fields for the report.
+    *   Parameter: info -- An object with at least visURL and type fields for the report.
     */
 
     this.saveToHistory = function(info)
     {
-        //Check we have necessary fields
+        //Ensure we have the necessary fields.
         if(!uid || !info.visURL || !info.type)
         {
-            console.log("Attempted to save history without necessary info.");
+            console.log("Attempted to make history report without necessary info.");
             return;
         }
 
-        //Set the doc specified by the URL hash (to avoid duplicates)
-        //Use the user's specific history table.
+        //his_db.doc(uid) references the current user's history collection.
+        //doc(hashCode(info.visURL)) uses the URL as a key to avoid duplicate entries.
         his_db.doc(uid).collection("history").doc(hashCode(info.visURL)).set
         ({
             URL: info.visURL,
@@ -143,7 +136,7 @@ function databaseConnector()
         .catch((error) => { console.error("Error making User History Report: ", error);} );
     }
 
-    //Return the encapsulated object
+    //Return all of the above encapsulated into an object. Requires 'new' keyword.
     return this;
 }
 
