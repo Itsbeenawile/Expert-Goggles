@@ -17,7 +17,7 @@ function parser()
 
     var populateTypes = async function()
     {
-        return fetch(chrome.extension.getURL("Assets/supported_types.json"))
+        return fetch(chrome.extension.getURL("config/supported-types.json"))
                .then((response) => response.json())
                .then((responseJson) => {return responseJson;});
     }

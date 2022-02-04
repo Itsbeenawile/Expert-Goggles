@@ -35,10 +35,10 @@ function sendToUI(info)
 function notifyUnsupported(info)
 {
     //Get the URL for the Red Error Icon
-    var icon = chrome.runtime.getURL("Assets/error_icon.png");
+    var icon = chrome.runtime.getURL("public/assets/error-icon.png");
 
     //Using the tab ID from the interceptor script, update the page action on that tab.
-    chrome.pageAction.setPopup({popup: "HTML/error_popup.html", tabId: info.tab});
+    chrome.pageAction.setPopup({popup: "html/err-popup.html", tabId: info.tab});
     chrome.pageAction.show(info.tab);
     chrome.pageAction.setIcon({tabId: info.tab, path: icon});
 
