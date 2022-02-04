@@ -42,8 +42,8 @@ funcLogger.replace = function(old_func, func_name)
         if(!funcLogger.funcsCalled.includes(func_name))
             funcLogger.funcsCalled.push(func_name);
 
-        // Main idea:
-        if(needArgs.includes(func_name) && arguments)   // if the needArgs array contains the
+        //If we need to grab the arguments to these functions...
+        if(needArgs.includes(func_name) && arguments)
         {
             var argString = func_name + "(";
             var count = 0;
@@ -123,10 +123,10 @@ function inspectMutations(mutations)
     }
 }
 
-//sendToParser() messages the captured list of D3 functions called by the page, as well as the URLs
-//of any iframes, out to the Parser script. If those lists are empty, the message is still sent.
+//messageOut() messages the captured list of D3 functions called by the page, as well as the URLs
+//of any iframes, back out to the injector. If those lists are empty, the message is still sent.
 
-function sendToParser()
+function messageOut()
 {
     //Generate a message with the necessary info
     var message = {};
@@ -139,9 +139,13 @@ function sendToParser()
     console.log(message.funcList);
     console.log(message.argList);
 
-    //Since this script is injected, we have to use window.postMessage
-    try{window.postMessage(message, "*");}
-    catch(error) {console.log(error)};
+    //Only Message if we have either captured functions or iframes
+    if(message.funcList.length > 0 || message.iframeList.length > 0)
+    {
+        //Since this script is injected, we have to use window.postMessage
+        try{window.postMessage(message, "*");}
+        catch(error) {console.log(error)};
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -164,13 +168,23 @@ document.addEventListener("DOMContentLoaded", function()
 
 //We use setTimeout to message out because some pages never finish loading, especially if
 //D3 code is manipulating elements. 1.2 seconds seems to be a reliable timer.
-setTimeout( function() {sendToParser();}, 1200);
+setTimeout( function() {messageOut();}, 1200);
 `;
 
 
 //-------------------------------------------------------------------------------------------------
 // End of Interceptor Code --> Injector Code
 //-------------------------------------------------------------------------------------------------
+
+//sendToBackground() messages the parsed information out to background.html page -- parser.js
+//Parameter: parseInfo -- An obj containing the necessary info from the interceptor to parse.
+
+function sendToBackground(info)
+{
+    info.from = "injector";
+    try{chrome.runtime.sendMessage(info);}
+    catch(error) { console.log(error); }
+}
 
 //Manually create a script tag with the interceptor code set as its textContent.
 //async is set to false to try and avoid racing script loads.
@@ -183,5 +197,14 @@ d3script.setAttribute("async", "false");
 //Append that script to document.
 document.documentElement.append(d3script);
 console.log("Expert Goggles: Injected D3 Interception Script.");
+
+//Listen for a message posted to the page, the Interceptor has to communicate via postMessage
+//because it is an injected script. The injector will forward that out to the db connector.
+window.addEventListener("message", (event) =>
+{
+    //Make sure we're only processing messages from Expert Goggles.
+    if(event.data.sender && event.data.sender == "ExpertGogglesInterceptor")
+        sendToBackground(event.data);
+});
 
 

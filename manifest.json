@@ -5,23 +5,19 @@
   "version": "1.1",
   "background":
   {
-    "page": "HTML/background.html",
+    "page": "html/background.html",
     "persisent": false
   },
   "content_scripts":
   [{
     "matches": ["<all_urls>"],
-    "js": ["JavaScript/injector.js"],
+    "js": ["js/injector.js"],
     "run_at": "document_start"
   },
   {
       "matches": ["<all_urls>"],
-      "css": ["CSS/sidebar.css"],
-      "js":
-      [
-          "JavaScript/parser.js",
-          "JavaScript/ui_generator.js"
-      ],
+      "css": ["css/sidebar.css"],
+      "js": ["js/ui-generator.js"],
       "run_at": "document_end"
   }],
   "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com/; object-src 'self'",
@@ -29,13 +25,12 @@
   {
       "default_tooltip": "No D3 Visualization Detected",
       "default_title": "Expert Goggles",
-      "default_popup": "HTML/default_popup.html"
+      "default_popup": "html/def-popup.html"
   },
   "icons":
   {
-    "128": "Assets/icon.png"
+    "128": "public/assets/icon.png"
   },
-  "web_accessible_resources": ["Assets/supported_types.json"],
   "permissions":
   [
     "storage",

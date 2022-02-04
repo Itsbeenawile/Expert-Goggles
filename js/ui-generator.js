@@ -14,7 +14,6 @@
 
 var sbOpened = -1; //-1 if the Sidebar is not currently showing, 1 if so.
 var sidebar = null; //Holds a sidebar div element.
-var myD3; //Holds the D3InfoObj that is sent from DBConn.
 
 //-------------------------------------------------------------------------------------------------
 // Functions
@@ -31,8 +30,8 @@ function toggleSidebar()
     //If the sidebar is closed, open it
     if(sbOpened < 0)
     {
-        document.body.style.marginRight = "260px";
-        sidebar.style.width = "248px";
+        document.body.style.marginRight = "285px";
+        sidebar.style.width = "275px";
         sidebar.style["padding-left"] = "5px";
         sidebar.style["padding-right"] = "5px";
     }
@@ -107,10 +106,16 @@ function reportError()
     sidebar.appendChild(thanks);
 }
 
+function fitIframe(iframe)
+{
+    iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+    iframe.style.width = "250px";
+}
+
 //generateSidebar() generates a sidebar div element and populates it with the guide received
 //from DBConn.js. The div is stored in the sidebar internal field.
 
-function generateSidebar(guideInfo)
+function generateSidebar(info)
 {
     //Create the div and style it.
     var sb = document.createElement("div");
@@ -118,28 +123,11 @@ function generateSidebar(guideInfo)
 
     //Take the Object Passed by the Database and Generate the Guide:
 
-    //Title
-    var titleDiv = document.createElement("div");
-    var outerDiv = document.createElement("div");
-    outerDiv.classList.add("titlediv");
-    titleDiv.innerHTML = guideInfo["Name"] + "<br><br>";
-    titleDiv.classList.add("guideTitle");
-    sb.appendChild(outerDiv);
-    outerDiv.appendChild(titleDiv);
-
-    //Image
-    var pic = document.createElement("img");
-    pic.src = guideInfo["img"];
-    pic.width = "225";
-    outerDiv.appendChild(pic);
-
-    //Body
-    var bodyDiv = document.createElement("div");
-    bodyDiv.innerHTML = "<br>" + guideInfo["Guide"] + "<br><br>";
-    bodyDiv.innerHTML += "-------------------------------------------<br>";
-    bodyDiv.innerHTML += "&nbsp;&nbsp;&nbsp;Did we get this type wrong?&nbsp;&nbsp;<br><br>";
-    bodyDiv.classList.add("bodyDiv");
-    sb.appendChild(bodyDiv);
+    //Import Datavizcatalogue guide into iframe
+    var iframe = document.createElement("iframe");
+    iframe.src = info.guideURL;
+    iframe.classList.add("iframeSet");
+    sb.appendChild(iframe);
 
     //Report Error Button
     var buttonDiv = document.createElement("div");
@@ -166,19 +154,14 @@ function generateSidebar(guideInfo)
 //UIGen.js is reactive: All execution depends on receiving a guide from DBConn
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)
 {
-    //Make sure we didn't accidentally intercept a message from the Parser
-    if(message.from != "db_connector")
+    //Make sure we didn't accidentally intercept an incorrect message
+    if(message.from != "ext_messenger")
         return;
-
-    //Otherwise, the message is a D3InfoObj from DBConn
-    myD3 = message;
-    var guideInfo = myD3.guide;
-    guideInfo["Name"] = myD3.type;
 
     //Use the received info to generate the sidebar, then create the prompt.
     try
     {
-        sidebar = generateSidebar(guideInfo);
+        sidebar = generateSidebar(message);
         document.body.appendChild(sidebar);
         createPrompt();
     }
