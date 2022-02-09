@@ -20,9 +20,10 @@ var scriptText = `
 var funcLogger = {}; //funcLogger holds the interception functions
 funcLogger.funcsCalled = []; //funcsCalled will store a list of D3 functions called by the page.
 funcLogger.argList = [];
+funcLogger.funcElems = [];
 var alreadyFired = false; //to ensure D3 source code is only fired once.
 var iframeList = []; //Cannot detect code inside of iframes, we'll let the Parser know they're here
-var needArgs = ["select", "selectAll", "attr", "svg", "csv", "append"];
+var needArgs = ["select", "selectAll", "attr", "svg", "csv", "append", "axis", "axisTop", "axisRight", "axisBottom", "axisLeft", "orient", "scale"];
 
 //-------------------------------------------------------------------------------------------------
 // Functions
@@ -38,9 +39,13 @@ funcLogger.replace = function(old_func, func_name)
 {
     return function()
     {
+        //console.log("func_name:" + func_name)
+        //console.log(arguments[0])
         //We don't need duplicates; Only push the function name if not already there.
-        if(!funcLogger.funcsCalled.includes(func_name))
-            funcLogger.funcsCalled.push(func_name);
+        //if(!funcLogger.funcsCalled.includes(func_name))
+        funcLogger.funcsCalled.push(func_name);
+        var toPush = [];
+        toPush.push(func_name);
 
         //If we need to grab the arguments to these functions...
         if(needArgs.includes(func_name) && arguments)
@@ -60,7 +65,11 @@ funcLogger.replace = function(old_func, func_name)
         }
 
         //Return the old function with this extra snippet of code appended.
-        return old_func.apply(this, arguments);
+        var thisElem = old_func.apply(this, arguments);
+        toPush.push(thisElem);
+        funcLogger.funcElems.push(toPush);
+        //console.log("Pushing: " + toPush)
+        return thisElem;
     }
 }
 
@@ -138,6 +147,32 @@ function messageOut()
     //Log Info Out
     console.log(message.funcList);
     console.log(message.argList);
+    console.log(funcLogger.funcElems);
+    for(var i = 0; i < funcLogger.funcElems.length; i++){
+        //console.log(funcLogger.funcElems[i]);
+        //console.log("\tONE");
+
+        var funcName = funcLogger.funcElems[i][0];
+        if(funcName === "select"){
+            console.log(funcLogger.funcElems[i]);
+            
+            var childs = funcLogger.funcElems[i][1];
+            console.log("CHILD:");
+            
+            console.log(childs);
+            var thisNode = childs[0]
+            console.log("CHILD[0]:");
+            console.log(thisNode);
+            
+            var thisNodeReference = thisNode[0];
+            console.log("(childs[0])[0]):");
+            console.log(thisNodeReference);
+
+            var thisNodeChildren = thisNodeReference.children;
+            console.log("(childs[0])[0]).children:");
+            console.log(thisNodeChildren);
+        }
+    }
 
     //Only Message if we have either captured functions or iframes
     if(message.funcList.length > 0 || message.iframeList.length > 0)
