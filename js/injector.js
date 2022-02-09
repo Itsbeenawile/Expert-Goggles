@@ -73,6 +73,21 @@ funcLogger.replace = function(old_func, func_name)
     }
 }
 
+function interceptNative(){
+    if(document){
+        for(var i = 0; i < needArgs.length; i++){
+            var name = needArgs[i];
+            var func = document[name];
+            //console.log(name);
+            if(typeof func == 'function'){
+                document[name] = funcLogger.replace(func, name); //...replace it.
+                console.log("is function")
+            }
+        }
+    }
+
+}
+
 //InterceptD3() checks whether D3 source code has loaded on the page. If it has, it uses
 //funcLogger.replace() to replace all D3 functions with self-logging functions. Additionally,
 //it disables the MutationObserver watching for script loading, to avoid a slow page execution.
@@ -82,6 +97,8 @@ function interceptD3()
     //Only fire the interceptor once.
     if(alreadyFired)
         return;
+
+    interceptNative();
 
     //Window.d3 is created by D3 source code.
     if(window.d3)
