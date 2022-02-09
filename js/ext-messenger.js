@@ -77,7 +77,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)
         }
         else //Otherwise, we attempt to parse the visualization type.
         {
-            message.type = parser.parseType(message);
+            message.type = parser.parseType(message.funcList);
             if(message.type == "unsupported") //If we failed to parse, create an error page action.
                 notifyUnsupported(message);
             else //Otherwise, grab the datavizcatalog URL, save history to db, and forward to UI.
