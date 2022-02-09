@@ -81,7 +81,6 @@ function interceptNative(){
             //console.log(name);
             if(typeof func == 'function'){
                 document[name] = funcLogger.replace(func, name); //...replace it.
-                console.log("is function")
             }
         }
     }
@@ -98,7 +97,7 @@ function interceptD3()
     if(alreadyFired)
         return;
 
-    interceptNative();
+    //interceptNative();
 
     //Window.d3 is created by D3 source code.
     if(window.d3)
@@ -188,6 +187,16 @@ function messageOut()
             var thisNodeChildren = thisNodeReference.children;
             console.log("(childs[0])[0]).children:");
             console.log(thisNodeChildren);
+
+            try
+            {
+                var theseChildren = (childs[0][0]).children;
+                for(var chil in theseChildren){
+                    (theseChildren[chil]).children[1].textContent = "TEST";
+                }
+            }catch(err){
+                console.log(err);
+            }
         }
     }
 
