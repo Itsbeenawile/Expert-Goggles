@@ -6,8 +6,12 @@
 *   the corresponding URL to a datavizcatalog.com guide.
 */
 
-function parser()
+function parser(isTest)
 {
+    //Use the argument passed in instantiation to determine if this is run in the unit test environment
+    //Default to false
+    var test = isTest || false;
+
     //-------------------------------------------------------------------------------------------------
     // Helper Functions
     //-------------------------------------------------------------------------------------------------
@@ -17,7 +21,15 @@ function parser()
 
     var populateTypes = async function()
     {
-        return fetch(chrome.extension.getURL("config/supported-types.json"))
+        //Check whether to load the ext. URL or the unit test URL for supported-types.json
+        var url;
+        if(test)
+            url = "../../config/supported-types.json";
+        else
+            url = chrome.extension.getURL("config/supported-types.json");
+
+        //Fetch the correct one and return it.
+        return fetch(url)
                .then((response) => response.json())
                .then((responseJson) => {return responseJson;});
     }
@@ -44,11 +56,11 @@ function parser()
     *   The parseType() function is the meat of the parser. It runs the list of D3 function calls
     *   against supported_types.json to try and determine the most likely visualization type. If it
     *   cannot determine the type, "unsupported" is returned.
-    *   Parameter: info -- An object with at least the funcList field populated.
+    *   Parameter: funcList -- An array listing detected D3 function calls.
     *   Returns: A string containing the parsed vis. type, or "unsupported" if parse fails.
     */
 
-    this.parseType = function(info)
+    this.parseType = function(funcList)
     {
         //Bookkeeping for parsing
         var possType; //Holds the most likely type. Overwritten as logic progresses.
@@ -69,7 +81,7 @@ function parser()
             //Run the intercepted D3 functions against marker function list.
             for(var currFunc = 0; currFunc < currEntry.functions.length; currFunc++)
             {
-                if(info.funcList.includes(currEntry.functions[currFunc]))
+                if(funcList.includes(currEntry.functions[currFunc]))
                     numMatches++; //Count Matches
             }
 
