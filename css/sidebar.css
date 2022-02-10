@@ -44,13 +44,14 @@
 
 .expertGogglesSidebar .iframeSet
 {
-    position:absolute;
-    top:--0px;
+    top:-260px;
     left:-0px;
     width:100%px;
-    height:100%;
+    height: -webkit-calc(100% + 260px);
+    position: absolute;
     overflow-x: hidden;
     white-space: nowrap;
+    background: white;
 }
 
 .expertGogglesSidebar .bodyDiv

@@ -106,12 +106,6 @@ function reportError()
     sidebar.appendChild(thanks);
 }
 
-function fitIframe(iframe)
-{
-    iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
-    iframe.style.width = "250px";
-}
-
 //generateSidebar() generates a sidebar div element and populates it with the guide received
 //from DBConn.js. The div is stored in the sidebar internal field.
 
@@ -126,9 +120,11 @@ function generateSidebar(info)
     //Import Datavizcatalogue guide into iframe
     var iframe = document.createElement("iframe");
     iframe.src = info.guideURL;
+    iframe.sandbox = "allow-top-navigation-by-user-activation";
     iframe.classList.add("iframeSet");
     sb.appendChild(iframe);
 
+    /* Commented Out Until UI Rework
     //Report Error Button
     var buttonDiv = document.createElement("div");
     var button = document.createElement("button");
@@ -136,12 +132,7 @@ function generateSidebar(info)
     buttonDiv.classList.add("titlediv");
     buttonDiv.appendChild(button);
     sb.appendChild(buttonDiv);
-    button.onclick = function(){ reportError(); };
-
-    //End Spacing
-    var spaceDiv = document.createElement("div");
-    spaceDiv.innerHTML = "<br><br><br>";
-    sb.appendChild(spaceDiv);
+    button.onclick = function(){ reportError(); };*/
 
     return sb;
 }
