@@ -30,8 +30,8 @@ function toggleSidebar()
     //If the sidebar is closed, open it
     if(sbOpened < 0)
     {
-        document.body.style.marginRight = "285px";
-        sidebar.style.width = "275px";
+        document.body.style.marginRight = "295px";
+        sidebar.style.width = "285px";
         sidebar.style["padding-left"] = "5px";
         sidebar.style["padding-right"] = "5px";
     }
