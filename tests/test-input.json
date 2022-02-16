@@ -1,0 +1,173 @@
+[
+  {
+	"Type": "Stacked Area Chart",
+	"Functions": ["select", "qualify", "ordinal", "range", "linear", "0", "stack", "area", "axis", "format", "csv", "dispatch", "rebind", "keys", "permute", "max", "transition", "formatPrefix"],
+	"URL": "https://money.cnn.com/interactive/economy/diversity-millennials-boomers/"
+  },
+  {
+    "Type": "Bar Chart",
+    "Functions": ["json", "dispatch", "rebind", "ordinal", "linear", "0", "rgb", "interpolateHcl", "hcl", "log", "ascending", "threshold", "bisect", "range", "descending", "select", "qualify", "format", "extent", "axis", "transition", "drag", "requote", "selectAll"],
+    "URL": "http://graphics.wsj.com/what-percent/"
+  },
+  {
+    "Type": "Stream Graph",
+    "Functions": ["tsv", "dispatch", "rebind", "min", "ascending", "range", "descending", "select", "qualify", "selectAll", "0", "axis", "linear", "format", "transition", "permute", "sum", "area", "timer", "bisect", "day", "rgb", "requote"],
+    "URL": "http://graphics.wsj.com/fed-composition/"
+  },
+  {
+    "Type": "Stacked Area Chart",
+    "Functions": ["ordinal", "tsv", "dispatch", "rebind", "select", "qualify", "requote", "keys", "descending", "range", "ascending", "sum", "nest", "map", "scale", "linear", "0", "extent", "axis", "transition", "selectAll", "area", "format"],
+    "URL": "http://graphics.wsj.com/global-growth/"
+  },
+  {
+    "Type": "Stacked Area Chart",
+    "Functions": ["timeParse", "scaleTime", "timeFormat", "scaleLinear", "area", "stack", "select", "stackOffsetNone", "curveBasis", "axisRight", "format", "axisBottom"],
+    "URL": "https://www.wsj.com/graphics/coming-to-america/"
+  },
+  {
+    "Type": "Pie Chart",
+    "Functions": ["ordinal", "arc", "pie", "select", "qualify", "json", "dispatch", "rebind", "sum", "range", "interpolate", "0", "selectAll"],
+    "URL": "http://graphics.wsj.com/medical-money/"
+  },
+  {
+    "Type": "Line Chart",
+    "Might Be": "Scatter Plot",
+    "Functions": ["format", "polygon", "linear", "interpolate", "4", "interpolateNumber", "axis", "select", "qualify", "csv", "xhr", "dispatch", "rebind", "nest", "range", "transition", "requote", "line", "mean", "sum", "voronoi", "selectAll"],
+    "URL": "https://archive.nytimes.com/www.nytimes.com/interactive/2013/03/29/sports/baseball/Strikeouts-Are-Still-Soaring.html"
+  },
+  {
+    "Type": "Span Chart",
+    "Functions": ["format", "linear", "0", "axis", "select", "qualify", "transition", "rebind", "bisector", "selectAll", "mouse", "extent", "requote", "timer"],
+    "URL": "http://graphics.wsj.com/gender-pay-gap/"
+  },
+  {
+    "Type": "Bubble Chart",
+    "Functions": ["max", "scale", "linear", "interpolate", "4", "interpolateNumber", "rebind", "log", "pow", "3", "2", "interpolateString", "interpolateRound", "select", "qualify", "axis", "range", "transition", "bisect", "format", "dispatch", "timer", "interpolateTransform", "transform"],
+    "URL": "https://archive.nytimes.com/www.nytimes.com/interactive/2012/05/17/business/dealbook/how-the-facebook-offering-compares.html"
+  },
+  {
+    "Type": "Histogram",
+    "Functions": ["satellite", "rebind", "path", "albersUsa", "albers", "ordinal", "range", "linear", "interpolate", "4", "interpolateNumber", "axis", "format", "select", "qualify", "selectAll", "json", "xhr", "dispatch", "csv", "nest", "stream", "merge", "max", "transition", "requote", "extent", "round"],
+    "URL": "https://archive.nytimes.com/www.nytimes.com/interactive/2013/03/01/world/americas/border-graphic.html"
+  },
+  {
+    "Type": "Stacked Area Chart",
+    "Functions": ["select", "max", "scaleBand", "scaleLinear", "tsv", "autoType", "stack", "range", "timeout", "interpolateNumber", "easeLinear"],
+    "URL": "https://flowingdata.com/projects/2021/work-hours-men-women/?initialWidth=1090&childId=work&parentTitle=How%20Much%20Women%20and%20Men%20Work%20%7C%20FlowingData&parentUrl=https%3A%2F%2Fflowingdata.com%2F2021%2F11%2F09%2Fhow-much-women-and-men-worked%2F"
+  },
+  {
+    "Type": "Stacked Bar Chart",
+    "Functions": ["format", "ordinal", "range", "linear", "0", "category10", "axis", "select", "qualify", "tsv", "dispatch", "rebind", "stack", "permute", "max", "transition"],
+    "URL": "https://bl.ocks.org/mbostock/raw/1134768/?raw=true"
+  },
+  {
+    "Type": "Bar Chart",
+    "Functions": ["linear", "0", "ordinal", "partition", "hierarchy", "rebind", "axis", "select", "qualify", "json", "dispatch", "max", "range", "format", "transition", "transform", "rgb"],
+    "URL": "https://bl.ocks.org/mbostock/raw/1283663/?raw=true"
+  },
+  {
+    "Type": "Stacked Bar Chart",
+    "Functions": ["select", "scaleBand", "scaleLinear", "scaleOrdinal", "csv", "max", "stack", "axisBottom", "axisLeft", "formatPrefix"],
+    "URL": "https://bl.ocks.org/mbostock/raw/3886208/?raw=true"
+  },
+  {
+    "Type": "Bar Chart",
+    "Functions": ["format", "ordinal", "range", "linear", "0", "axis", "select", "qualify", "tsv", "dispatch", "rebind", "max", "transition", "transform"],
+    "URL": "https://bl.ocks.org/mbostock/raw/3885705/?raw=true"
+  },
+  {
+    "Type": "Stacked Bar Chart",
+    "Functions": ["select", "scaleBand", "scaleLinear", "scaleOrdinal", "stack", "csv", "stackOffsetExpand", "axisBottom", "axisLeft", "format"],
+    "URL": "https://bl.ocks.org/mbostock/raw/3886394/?raw=true"
+  },
+  {
+    "Type": "Stacked Area Chart",
+    "Functions": ["format", "scale", "linear", "0", "rebind", "category20c", "ordinal", "axis", "stack", "nest", "area", "select", "qualify", "csv", "dispatch", "map", "range", "permute", "extent", "max", "days", "transition"],
+    "URL": "https://bl.ocks.org/mbostock/raw/3020685/?raw=true"
+  },
+  {
+    "Type": "Area Chart",
+    "Functions": ["select", "timeParse", "scaleTime", "timeFormat", "scaleLinear", "area", "tsv", "extent", "max", "axisBottom", "axisLeft", "format"],
+    "URL": "https://bl.ocks.org/mbostock/raw/3883195/?raw=true"
+  },
+  {
+    "Type": "Area Chart",
+    "Functions": ["select", "timeParse", "timeFormat", "scaleTime", "scaleLinear", "axisBottom", "axisLeft", "area", "zoom", "csv", "extent", "max", "format", "rescaleX", "invertX", "curveStepAfter", "invert"],
+    "URL": "https://bl.ocks.org/mbostock/raw/4015254/?raw=true"
+  },
+  {
+    "Type": "Stacked Area Chart",
+    "Functions": ["select", "timeParse", "scaleTime", "timeFormat", "scaleLinear", "scaleOrdinal", "stack", "area", "tsv", "extent", "axisBottom", "axisLeft", "format"],
+    "URL": "https://bl.ocks.org/mbostock/raw/3885211/?raw=true"
+  },
+  {
+    "Type": "Box Plot",
+    "Functions": ["csv", "dispatch", "rebind", "functor", "select", "qualify", "ascending", "quantile", "range", "linear", "0", "format"],
+    "URL": "https://bl.ocks.org/mbostock/raw/4061502/?raw=true"
+  },
+  {
+    "Type": "Candlestick Chart",
+    "Functions": ["csv", "timeParse", "select", "min", "max", "scaleLinear", "scaleQuantize", "scaleBand", "range", "axisBottom", "axisLeft", "format", "zoom"],
+    "URL": "https://bl.ocks.org/tompiler/raw/6045b80d2164077faaf96e0304531bba/?raw=true"
+  },
+  {
+    "Type": "Circle Packing Chart",
+    "Functions": ["pack", "hierarchy", "rebind", "select", "qualify"],
+    "URL": "https://bl.ocks.org/mbostock/raw/1627378/?raw=true"
+  },
+  {
+    "Type": "Circle Packing Chart",
+    "Functions": ["select", "format", "pack", "json", "hierarchy"],
+    "URL": "https://bl.ocks.org/mbostock/raw/4063530/?raw=true"
+  },
+  {
+    "Type": "Histogram",
+    "Functions": ["select", "histogram", "ordinal", "linear", "0", "axis", "rebind", "range", "format", "min", "max", "bisect", "qualify", "transition"],
+    "URL": "https://bl.ocks.org/mbostock/raw/1933560/?raw=true"
+  },
+  {
+    "Type": "Histogram",
+    "Functions": ["select", "qualify", "linear", "0", "csv", "dispatch", "rebind", "max", "axis", "range", "format", "transition"],
+    "URL": "http://bl.ocks.org/mbostock/raw/1624660/?raw=true"
+  },
+  {
+    "Type": "Pie Chart",
+    "Functions": ["category20", "ordinal", "pie", "arc", "select", "qualify", "tsv", "dispatch", "rebind", "sum", "range", "selectAll"],
+    "URL": "https://bl.ocks.org/mbostock/raw/1346395/?raw=true"
+  },
+  {
+    "Type": "Scatter Plot",
+    "Functions": ["linear", "0", "category10", "ordinal", "select", "qualify", "csv", "dispatch", "rebind", "keys", "merge", "extent", "axis", "range", "format", "transition"],
+    "URL": "https://bl.ocks.org/mbostock/raw/3183403/?raw=true"
+  },
+  {
+    "Type": "Scatter Plot",
+    "Functions": ["linear", "0", "category10", "ordinal", "axis", "select", "qualify", "tsv", "dispatch", "rebind", "extent", "range", "format", "transition"],
+    "URL": "https://bl.ocks.org/mbostock/raw/3887118/?raw=true"
+  },
+  {
+    "Type": "Sequences Sunburst",
+    "Functions": ["category20c", "ordinal", "select", "qualify", "partition", "hierarchy", "rebind", "arc", "json", "dispatch", "selectAll"],
+    "URL": "https://bl.ocks.org/mbostock/raw/4063423/?raw=true"
+  },
+  {
+    "Type": "Sequences Sunburst",
+    "Functions": ["category20c", "ordinal", "partition", "hierarchy", "rebind", "arc", "select", "qualify", "json", "dispatch"],
+    "URL": "https://bl.ocks.org/mbostock/raw/1306365/?raw=true"
+  },
+  {
+    "Type": "Stream Graph",
+    "Functions": ["stack", "range", "transpose", "stackOffsetWiggle", "select", "scaleLinear", "min", "max", "area", "interpolateCool"],
+    "URL": "https://bl.ocks.org/mbostock/raw/4060954/?raw=true"
+  },
+  {
+    "Type": "Stream Graph",
+    "Functions": ["format", "select", "qualify", "scale", "linear", "interpolate", "4", "interpolateNumber", "rebind", "ordinal", "axis", "stack", "nest", "area", "csv", "text", "xhr", "range", "permute", "extent", "max", "weeks", "day", "transition", "mouse", "dispatch", "timer", "tween", "requote"],
+    "URL": "http://bl.ocks.org/WillTurman/raw/4631136/?raw=true"
+  },
+  {
+    "Type": "TreeMap",
+    "Functions": ["select", "interpolateRgb", "scaleOrdinal", "format", "treemap", "json", "hierarchy", "treemapResquarify", "selectAll", "timeout"],
+    "URL": "https://bl.ocks.org/mbostock/raw/4063582/?raw=true"
+  }
+]

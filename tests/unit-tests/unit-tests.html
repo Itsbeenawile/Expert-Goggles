@@ -12,11 +12,11 @@
         <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
         <script src="../../js/parser.js"></script>
         <script>
-            //Load the parser and bookkeeping before the test runs
+            //Setup Mocha, the parser, and the test-input up before the test runs to allow time for json to load
             window.mocha.setup('bdd');
             var parser = new parser(true);
         </script>
-        <script src="parser_test.js"></script>
+        <script src="parser-test.js"></script>
         <script>
             //Run the test after giving the parser time to load.
             window.mocha.checkLeaks();
