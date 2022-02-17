@@ -21,16 +21,16 @@ done, a notice is generated near the visualization point on the page, which the 
 
 <h3>Features in Development</h3>
 Expert Goggles is still actively in development. Primary updates in development include:<br>
--Transitioning the extension's UI elements from a messy and outdated JS DOM API implementation into a more modern framework, likely ReactJS.
--Providing "context-aware" visualization analysis, such as step-by-step guidance that highlights various graph elements.
--Adding usage detection and logging, in order to assist with University research on data-literacy training.
+-Transitioning the extension's UI elements from a messy and outdated JS DOM API implementation into a more modern framework, likely ReactJS.<br>
+-Providing "context-aware" visualization analysis, such as step-by-step guidance that highlights various graph elements.<br>
+-Adding usage detection and logging, in order to assist with University research on data-literacy training.<br><br>
 
 In the long run, Expert Goggles will have support for other visualization libraries added, and a computer-vision approach is being considered.
 
 <h3>Known Issues</h3>
--Expert Goggles cannot currently detect visualizations embedded in iframes, due to CORS policy issues. 
--Occassionally, Expert Goggles will disrupt the loading of certain D3 visualizations. This appears most commonly with Heatmaps.
--The extension's dashboard webpage is currently down for rework, so UI elements that referenced it are currently blank.
+-Expert Goggles cannot currently detect visualizations embedded in iframes, due to CORS policy issues.<br>
+-Occassionally, Expert Goggles will disrupt the loading of certain D3 visualizations. This appears most commonly with Heatmaps.<br>
+-The extension's dashboard webpage is currently down for rework, so UI elements that referenced it are currently blank.<br>
 
 <h3>Installing Expert Goggles</h3>
 Expert Goggles can be installed using the following steps:<br>
