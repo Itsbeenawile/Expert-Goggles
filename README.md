@@ -17,7 +17,7 @@ money to get formal training in data literacy.
 Expert Goggles is a web browser extension that assists user in interpreting various forms of data visualization. As an entry point for a larger vision, Expert Goggles is currently
 designed to work with visualizations from the D3 library. With Expert Goggles installed, a user browses the web and finds an article or other publication containing data 
 visualizations. The extension uses a web scraper to parse the source code of the page to locate the point at which the D3 visualization occurs and determine its type. Once this is
-done, a notice is generated near the visualization point on the page, which the user can click and access a sidebar with information as to how to interpret it.<br><br>
+done, a notice is generated near the visualization point on the page, which the user can click and access a sidebar with information as to how to interpret it.<br>
 
 <h3>Features in Development</h3>
 Expert Goggles is still actively in development. Primary updates in development include:<br>
